@@ -4,6 +4,7 @@ from genomeinsight import __version__
 from genomeinsight.qc.gc_content import calculate_gc
 from genomeinsight.qc.reverse_complement import reverse_complement
 from genomeinsight.qc.transcription import transcribe
+from genomeinsight.qc.translation import translate
 
 
 def main():
@@ -69,7 +70,20 @@ def main():
         help="DNA sequence"
     )
 
+    # Translation
+    translate_parser = subparsers.add_parser(
+    "translate",
+    help="Translate DNA into protein"
+)
+
+    translate_parser.add_argument(
+    "sequence",
+    help="DNA sequence"
+    )
+
+
     args = parser.parse_args()
+
 
     if args.command == "version":
         print(f"GenomeInsight v{__version__}")
@@ -108,6 +122,12 @@ def main():
 
         print(f"DNA Sequence : {args.sequence.upper()}")
         print(f"RNA Sequence : {rna}")
+
+    elif args.command == "translate":
+        protein = translate(args.sequence)
+
+        print(f"DNA Sequence     : {args.sequence.upper()}")
+        print(f"Protein Sequence : {protein}")
 
     else:
         parser.print_help()
