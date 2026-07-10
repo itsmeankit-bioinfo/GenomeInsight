@@ -5,6 +5,7 @@ from genomeinsight.qc.gc_content import calculate_gc
 from genomeinsight.qc.reverse_complement import reverse_complement
 from genomeinsight.qc.transcription import transcribe
 from genomeinsight.qc.translation import translate
+from genomeinsight.qc.sequence_stats import sequence_statistics
 
 
 def main():
@@ -15,25 +16,25 @@ def main():
 
     subparsers = parser.add_subparsers(dest="command")
 
-    # ----------------------------
+    # -------------------------------------------------
     # Version
-    # ----------------------------
+    # -------------------------------------------------
     subparsers.add_parser(
         "version",
         help="Show GenomeInsight version"
     )
 
-    # ----------------------------
+    # -------------------------------------------------
     # Info
-    # ----------------------------
+    # -------------------------------------------------
     subparsers.add_parser(
         "info",
         help="Display project information"
     )
 
-    # ----------------------------
+    # -------------------------------------------------
     # GC Content
-    # ----------------------------
+    # -------------------------------------------------
     gc_parser = subparsers.add_parser(
         "gc",
         help="Calculate GC content"
@@ -44,9 +45,9 @@ def main():
         help="DNA sequence"
     )
 
-    # ----------------------------
+    # -------------------------------------------------
     # Reverse Complement
-    # ----------------------------
+    # -------------------------------------------------
     reverse_parser = subparsers.add_parser(
         "reverse",
         help="Generate reverse complement"
@@ -57,9 +58,9 @@ def main():
         help="DNA sequence"
     )
 
-    # ----------------------------
+    # -------------------------------------------------
     # DNA -> RNA
-    # ----------------------------
+    # -------------------------------------------------
     transcribe_parser = subparsers.add_parser(
         "transcribe",
         help="Transcribe DNA into RNA"
@@ -70,20 +71,37 @@ def main():
         help="DNA sequence"
     )
 
-    # Translation
+    # -------------------------------------------------
+    # DNA -> Protein
+    # -------------------------------------------------
     translate_parser = subparsers.add_parser(
-    "translate",
-    help="Translate DNA into protein"
-)
-
-    translate_parser.add_argument(
-    "sequence",
-    help="DNA sequence"
+        "translate",
+        help="Translate DNA into protein"
     )
 
+    translate_parser.add_argument(
+        "sequence",
+        help="DNA sequence"
+    )
+
+    # -------------------------------------------------
+    # Sequence Statistics
+    # -------------------------------------------------
+    stats_parser = subparsers.add_parser(
+        "stats",
+        help="Display sequence statistics"
+    )
+
+    stats_parser.add_argument(
+        "sequence",
+        help="DNA sequence"
+    )
 
     args = parser.parse_args()
 
+    # -------------------------------------------------
+    # Execute Commands
+    # -------------------------------------------------
 
     if args.command == "version":
         print(f"GenomeInsight v{__version__}")
@@ -128,6 +146,33 @@ def main():
 
         print(f"DNA Sequence     : {args.sequence.upper()}")
         print(f"Protein Sequence : {protein}")
+
+    elif args.command == "stats":
+        stats = sequence_statistics(args.sequence)
+
+        print("Sequence Statistics")
+        print("=" * 20)
+        print()
+
+        print(f"Sequence Length : {stats['length']}")
+        print()
+
+        print("Base Counts")
+        print("-" * 11)
+
+        print(f"A : {stats['A']}")
+        print(f"T : {stats['T']}")
+        print(f"G : {stats['G']}")
+        print(f"C : {stats['C']}")
+        print(f"N : {stats['N']}")
+        print()
+
+        print(f"GC Count : {stats['gc']}")
+        print(f"AT Count : {stats['at']}")
+        print()
+
+        print(f"GC Content : {stats['gc_content']:.2f}%")
+        print(f"AT Content : {stats['at_content']:.2f}%")
 
     else:
         parser.print_help()
