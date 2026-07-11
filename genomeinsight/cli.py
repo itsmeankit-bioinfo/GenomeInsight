@@ -11,7 +11,7 @@ from genomeinsight.commands import (
     stats,
     fasta,
     fastq,
-    
+    orf,
 )
 
 
@@ -41,6 +41,7 @@ def main():
     stats.register(subparsers)
     fasta.register(subparsers)
     fastq.register(subparsers)
+    orf.register(subparsers)
     args = parser.parse_args()
 
     if hasattr(args, "func"):
