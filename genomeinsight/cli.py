@@ -13,6 +13,7 @@ from genomeinsight.commands import (
     fastq,
     orf,
     kmer,
+    motif,
 )
 
 
@@ -44,6 +45,7 @@ def main():
     fastq.register(subparsers)
     orf.register(subparsers)
     kmer.register(subparsers)
+    motif.register(subparsers)
     args = parser.parse_args()
 
     if hasattr(args, "func"):
