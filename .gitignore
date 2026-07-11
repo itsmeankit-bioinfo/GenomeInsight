@@ -216,3 +216,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# FastQC
+fastqc_report/
+*_fastqc.html
+*_fastqc.zip
+
+# Reports
+reports/
+*.html
+
+# Python
+__pycache__/
+*.pyc
