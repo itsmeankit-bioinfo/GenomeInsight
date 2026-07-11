@@ -14,6 +14,7 @@ from genomeinsight.commands import (
     orf,
     kmer,
     motif,
+    restriction,
 )
 
 
@@ -46,6 +47,7 @@ def main():
     orf.register(subparsers)
     kmer.register(subparsers)
     motif.register(subparsers)
+    restriction.register(subparsers)
     args = parser.parse_args()
 
     if hasattr(args, "func"):
