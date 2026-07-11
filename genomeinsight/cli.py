@@ -1,12 +1,17 @@
 import argparse
 
+import argparse
+
 from genomeinsight import __version__
+
+from genomeinsight.analysis.gc_content import calculate_gc
+from genomeinsight.analysis.reverse_complement import reverse_complement
+from genomeinsight.analysis.transcription import transcribe
+from genomeinsight.analysis.translation import translate
+from genomeinsight.analysis.sequence_stats import sequence_statistics
+
 from genomeinsight.io.fasta import read_fasta
-from genomeinsight.qc.gc_content import calculate_gc
-from genomeinsight.qc.reverse_complement import reverse_complement
-from genomeinsight.qc.sequence_stats import sequence_statistics
-from genomeinsight.qc.transcription import transcribe
-from genomeinsight.qc.translation import translate
+from genomeinsight.io.validator import validate_fasta
 
 
 def main():
