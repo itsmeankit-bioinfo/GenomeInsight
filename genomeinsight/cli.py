@@ -3,8 +3,15 @@ import argparse
 from genomeinsight import __version__
 
 from genomeinsight.commands import (
+    info,
     gc,
     reverse,
+    transcribe,
+    translate,
+    stats,
+    fasta,
+    fastq,
+    
 )
 
 
@@ -26,9 +33,14 @@ def main():
     )
 
     # Register commands
+    info.register(subparsers)
     gc.register(subparsers)
     reverse.register(subparsers)
-
+    transcribe.register(subparsers)
+    translate.register(subparsers)
+    stats.register(subparsers)
+    fasta.register(subparsers)
+    fastq.register(subparsers)
     args = parser.parse_args()
 
     if hasattr(args, "func"):
