@@ -12,6 +12,7 @@ from genomeinsight.commands import (
     fasta,
     fastq,
     orf,
+    kmer,
 )
 
 
@@ -42,6 +43,7 @@ def main():
     fasta.register(subparsers)
     fastq.register(subparsers)
     orf.register(subparsers)
+    kmer.register(subparsers)
     args = parser.parse_args()
 
     if hasattr(args, "func"):
