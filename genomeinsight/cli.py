@@ -16,6 +16,7 @@ from genomeinsight.commands import (
     motif,
     restriction,
     primer,
+    n50,
 )
 
 
@@ -50,6 +51,7 @@ def main():
     motif.register(subparsers)
     restriction.register(subparsers)
     primer.register(subparsers)
+    n50.register(subparsers)
     args = parser.parse_args()
 
     if hasattr(args, "func"):
