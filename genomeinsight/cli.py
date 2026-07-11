@@ -18,6 +18,7 @@ from genomeinsight.commands import (
     primer,
     n50,
     quality,
+    gff,
 )
 
 
@@ -54,6 +55,7 @@ def main():
     primer.register(subparsers)
     n50.register(subparsers)
     quality.register(subparsers)
+    gff.register(subparsers)
     args = parser.parse_args()
 
     if hasattr(args, "func"):
