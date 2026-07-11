@@ -10,6 +10,7 @@ from genomeinsight.commands import (
     translate,
     stats,
     fasta,
+    validate,
     fastq,
     orf,
     kmer,
@@ -50,6 +51,7 @@ def main():
     translate.register(subparsers)
     stats.register(subparsers)
     fasta.register(subparsers)
+    validate.register(subparsers)
     fastq.register(subparsers)
     orf.register(subparsers)
     kmer.register(subparsers)
