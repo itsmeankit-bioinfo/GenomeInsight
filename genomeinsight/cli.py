@@ -1,11 +1,12 @@
 import argparse
 
 from genomeinsight import __version__
+from genomeinsight.io.fasta import read_fasta
 from genomeinsight.qc.gc_content import calculate_gc
 from genomeinsight.qc.reverse_complement import reverse_complement
+from genomeinsight.qc.sequence_stats import sequence_statistics
 from genomeinsight.qc.transcription import transcribe
 from genomeinsight.qc.translation import translate
-from genomeinsight.qc.sequence_stats import sequence_statistics
 
 
 def main():
@@ -97,6 +98,19 @@ def main():
         help="DNA sequence"
     )
 
+    # -------------------------------------------------
+    # FASTA Parser
+    # -------------------------------------------------
+    fasta_parser = subparsers.add_parser(
+        "fasta",
+        help="Read and summarize a FASTA file"
+    )
+
+    fasta_parser.add_argument(
+        "file",
+        help="Path to FASTA file"
+    )
+
     args = parser.parse_args()
 
     # -------------------------------------------------
@@ -150,7 +164,7 @@ def main():
     elif args.command == "stats":
         stats = sequence_statistics(args.sequence)
 
-        print("Sequence Statistics")
+        print("\nSequence Statistics")
         print("=" * 20)
         print()
 
@@ -173,6 +187,29 @@ def main():
 
         print(f"GC Content : {stats['gc_content']:.2f}%")
         print(f"AT Content : {stats['at_content']:.2f}%")
+
+    elif args.command == "fasta":
+
+        sequences = read_fasta(args.file)
+
+        print("\nGenomeInsight FASTA Report")
+        print("=" * 40)
+        print()
+
+        print(f"File : {args.file}")
+        print(f"Total Sequences : {len(sequences)}")
+
+        for index, seq in enumerate(sequences, start=1):
+
+            stats = sequence_statistics(seq["sequence"])
+
+            print("\n" + "-" * 40)
+            print(f"Sequence {index}")
+            print("-" * 40)
+
+            print(f"ID         : {seq['id']}")
+            print(f"Length     : {stats['length']} bp")
+            print(f"GC Content : {stats['gc_content']:.2f}%")
 
     else:
         parser.print_help()
