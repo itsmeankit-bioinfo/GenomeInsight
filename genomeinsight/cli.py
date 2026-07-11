@@ -15,15 +15,14 @@ def main():
         description="GenomeInsight - A Python toolkit for genomics and metagenomics"
     )
 
-    subparsers = parser.add_subparsers(dest="command")
-
-    # -------------------------------------------------
-    # Version
-    # -------------------------------------------------
-    subparsers.add_parser(
-        "version",
+    # Global Options
+    parser.add_argument(
+        "--version",
+        action="store_true",
         help="Show GenomeInsight version"
     )
+
+    subparsers = parser.add_subparsers(dest="command")
 
     # -------------------------------------------------
     # Info
@@ -114,13 +113,18 @@ def main():
     args = parser.parse_args()
 
     # -------------------------------------------------
-    # Execute Commands
+    # Global Options
     # -------------------------------------------------
 
-    if args.command == "version":
+    if args.version:
         print(f"GenomeInsight v{__version__}")
+        return
 
-    elif args.command == "info":
+    # -------------------------------------------------
+    # Commands
+    # -------------------------------------------------
+
+    if args.command == "info":
         print("GenomeInsight")
         print("Author : Ankit Raj")
         print("Python toolkit for genomics and metagenomics.")
@@ -189,7 +193,6 @@ def main():
         print(f"AT Content : {stats['at_content']:.2f}%")
 
     elif args.command == "fasta":
-
         sequences = read_fasta(args.file)
 
         print("\nGenomeInsight FASTA Report")
