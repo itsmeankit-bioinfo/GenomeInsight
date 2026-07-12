@@ -3,73 +3,98 @@ import argparse
 from genomeinsight import __version__
 
 from genomeinsight.commands import (
-    info,
+    align,
+    fasta,
+    fastq,
+    fastqc,
     gc,
+    gff,
+    info,
+    kmer,
+    localalign,
+    motif,
+    n50,
+    orf,
+    primer,
+    quality,
+    restriction,
     reverse,
+    stats,
     transcribe,
     translate,
-    stats,
-    fasta,
     validate,
-    fastq,
-    orf,
-    kmer,
-    motif,
-    restriction,
-    primer,
-    n50,
-    quality,
-    gff,
-    align,
-    localalign,
-    fastqc,
 )
 
 
 def main():
     parser = argparse.ArgumentParser(
         prog="genomeinsight",
-        description="GenomeInsight - A Python toolkit for genomics and metagenomics"
+        description="GenomeInsight - A Python toolkit for genomics and metagenomics",
     )
 
     parser.add_argument(
         "--version",
         action="version",
-        version=f"GenomeInsight v{__version__}"
+        version=f"GenomeInsight v{__version__}",
     )
 
     subparsers = parser.add_subparsers(
         dest="command",
-        metavar="<command>"
+        metavar="<command>",
+        required=True,
     )
 
-    # Register commands
+    # ==========================
+    # General
+    # ==========================
     info.register(subparsers)
+
+    # ==========================
+    # Sequence Analysis
+    # ==========================
     gc.register(subparsers)
     reverse.register(subparsers)
     transcribe.register(subparsers)
     translate.register(subparsers)
     stats.register(subparsers)
+
+    # ==========================
+    # File Processing
+    # ==========================
     fasta.register(subparsers)
-    validate.register(subparsers)
     fastq.register(subparsers)
+    validate.register(subparsers)
+    gff.register(subparsers)
+
+    # ==========================
+    # Bioinformatics Algorithms
+    # ==========================
     orf.register(subparsers)
     kmer.register(subparsers)
     motif.register(subparsers)
     restriction.register(subparsers)
     primer.register(subparsers)
-    n50.register(subparsers)
-    quality.register(subparsers)
-    gff.register(subparsers)
     align.register(subparsers)
     localalign.register(subparsers)
-    fastqc.register(subparsers)
-    args = parser.parse_args()
+    n50.register(subparsers)
+    quality.register(subparsers)
 
-    if hasattr(args, "func"):
-        args.func(args)
-    else:
-        parser.print_help()
+    # ==========================
+    # External Tools
+    # ==========================
+    fastqc.register(subparsers)
+
+    # Future Integrations
+    # fastp.register(subparsers)
+    # bwa.register(subparsers)
+    # samtools.register(subparsers)
+    # spades.register(subparsers)
+    # quast.register(subparsers)
+    # prokka.register(subparsers)
+    # blast.register(subparsers)
+
+    args = parser.parse_args()
+    args.func(args)
 
 
 if __name__ == "__main__":
