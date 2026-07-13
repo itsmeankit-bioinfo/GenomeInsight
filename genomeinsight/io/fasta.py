@@ -36,10 +36,12 @@ def read_fasta(file_path: str):
 
                 if current_id is not None:
 
-                    sequences.append({
-                        "id": current_id,
-                        "sequence": "".join(current_sequence)
-                    })
+                    sequences.append(
+                        {
+                            "id": current_id,
+                            "sequence": "".join(current_sequence),
+                        }
+                    )
 
                 current_id = line[1:]
                 current_sequence = []
@@ -49,9 +51,11 @@ def read_fasta(file_path: str):
 
         if current_id is not None:
 
-            sequences.append({
-                "id": current_id,
-                "sequence": "".join(current_sequence)
-            })
+            sequences.append(
+                {
+                    "id": current_id,
+                    "sequence": "".join(current_sequence),
+                }
+            )
 
     return sequences
