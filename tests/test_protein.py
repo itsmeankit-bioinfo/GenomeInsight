@@ -1,22 +1,47 @@
-from genomeinsight.analysis.protein import analyze_protein
+from genomeinsight.analysis.protein import (
+    analyze_protein,
+    amino_acid_composition,
+    aromaticity,
+    gravy,
+    instability_index,
+    isoelectric_point,
+    molecular_weight,
+)
 
 
-def test_length():
+SEQUENCE = "MKWVTFISLLFLFSSAYSRGVFRR"
 
-    result = analyze_protein("MKWVTF")
 
-    assert result["length"] == 6
+def test_analyze_protein():
+    result = analyze_protein(SEQUENCE)
+
+    assert result["length"] == len(SEQUENCE)
+    assert result["molecular_weight"] > 0
+    assert result["isoelectric_point"] > 0
+
+
+def test_amino_acid_composition():
+    composition = amino_acid_composition(SEQUENCE)
+
+    assert composition["M"] == 1
+    assert sum(composition.values()) == len(SEQUENCE)
 
 
 def test_molecular_weight():
-
-    result = analyze_protein("MKWVTF")
-
-    assert result["molecular_weight"] > 0
+    assert molecular_weight(SEQUENCE) > 0
 
 
-def test_pi():
+def test_isoelectric_point():
+    assert isoelectric_point(SEQUENCE) > 0
 
-    result = analyze_protein("MKWVTF")
 
-    assert result["isoelectric_point"] > 0
+def test_gravy():
+    assert isinstance(gravy(SEQUENCE), float)
+
+
+def test_aromaticity():
+    assert isinstance(aromaticity(SEQUENCE), float)
+
+
+def test_instability():
+    assert isinstance(instability_index(SEQUENCE), float)
