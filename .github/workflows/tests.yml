@@ -39,6 +39,10 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install -e .
 
+      - name: Run Ruff
+        run: |
+          python -m ruff check .
+
       - name: Run Tests
         run: |
           python -m pytest -v
