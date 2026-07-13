@@ -1,5 +1,5 @@
 -e git+https://github.com/itsmeankit-bioinfo/GenomeInsight.git@7047e8a37d518015651a9fa9d5e063168e2c4b2c#egg=genomeinsight
 PyYAML==6.0.3
 pytest>=8.0
-pyyaml
+pytest>=8.0
 ruff>=0.12
