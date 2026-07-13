@@ -23,6 +23,7 @@ from genomeinsight.commands import (
     transcribe,
     translate,
     validate,
+    protein,
 )
 
 
@@ -78,6 +79,7 @@ def main():
     localalign.register(subparsers)
     n50.register(subparsers)
     quality.register(subparsers)
+    protein.register(subparsers)
 
     # ==========================
     # External Tools
