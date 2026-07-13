@@ -30,7 +30,7 @@ def read_fastq(file_path: str):
                 break
 
             sequence = file.readline().strip()
-            plus = file.readline().strip()
+            _ = file.readline().strip()
             quality = file.readline().strip()
 
             reads.append({
