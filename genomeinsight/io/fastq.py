@@ -25,10 +25,6 @@ def read_fastq(file_path: str):
         while True:
 
             header = file.readline().strip()
-
-            if not header:
-                break
-
             sequence = file.readline().strip()
             _ = file.readline().strip()
             quality = file.readline().strip()
