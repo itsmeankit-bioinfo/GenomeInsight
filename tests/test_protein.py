@@ -6,6 +6,7 @@ from genomeinsight.analysis.protein import (
     instability_index,
     isoelectric_point,
     molecular_weight,
+
 )
 
 
@@ -51,3 +52,9 @@ def test_molecular_weight_units():
 
     assert mw > 0
     assert mw / 1000 > 0
+
+def test_pi_function():
+    assert isoelectric_point(SEQUENCE) > 0
+
+def test_pi():
+    assert isoelectric_point(SEQUENCE) > 0
