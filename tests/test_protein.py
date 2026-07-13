@@ -45,3 +45,9 @@ def test_aromaticity():
 
 def test_instability():
     assert isinstance(instability_index(SEQUENCE), float)
+
+def test_molecular_weight_units():
+    mw = molecular_weight(SEQUENCE)
+
+    assert mw > 0
+    assert mw / 1000 > 0

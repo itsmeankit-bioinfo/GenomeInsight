@@ -5,6 +5,7 @@ Protein analysis CLI command.
 from genomeinsight.analysis.protein import (
     analyze_protein,
     amino_acid_composition,
+    molecular_weight,
 )
 from genomeinsight.io.fasta import read_fasta
 
@@ -52,6 +53,26 @@ def run_composition(args):
             print(f"{aa:2} : {count}")
 
 
+def run_mw(args):
+    """
+    Display molecular weight.
+    """
+    proteins = read_fasta(args.file)
+
+    if not proteins:
+        print("No protein sequences found.")
+        return
+
+    for protein in proteins:
+        mw = molecular_weight(protein["sequence"])
+
+        print("=" * 60)
+        print(f"Protein ID : {protein['id']}")
+        print()
+        print(f"Molecular Weight : {mw:.2f} Da")
+        print(f"                 : {mw / 1000:.2f} kDa")
+
+
 def register(subparsers):
     """
     Register protein commands.
@@ -68,9 +89,9 @@ def register(subparsers):
         required=True,
     )
 
-    # ------------------------------------------------------------------
+    # ------------------------------------------------------------
     # protein info
-    # ------------------------------------------------------------------
+    # ------------------------------------------------------------
     info_parser = protein_subparsers.add_parser(
         "info",
         help="Display protein statistics",
@@ -88,9 +109,9 @@ def register(subparsers):
 
     info_parser.set_defaults(func=run_info)
 
-    # ------------------------------------------------------------------
+    # ------------------------------------------------------------
     # protein composition
-    # ------------------------------------------------------------------
+    # ------------------------------------------------------------
     composition_parser = protein_subparsers.add_parser(
         "composition",
         help="Display amino acid composition",
@@ -104,3 +125,20 @@ def register(subparsers):
     )
 
     composition_parser.set_defaults(func=run_composition)
+
+    # ------------------------------------------------------------
+    # protein molecular weight
+    # ------------------------------------------------------------
+    mw_parser = protein_subparsers.add_parser(
+        "mw",
+        help="Calculate molecular weight",
+        description="Calculate molecular weight of protein sequences.",
+    )
+
+    mw_parser.add_argument(
+        "file",
+        metavar="FASTA",
+        help="Path to a protein FASTA file",
+    )
+
+    mw_parser.set_defaults(func=run_mw)
