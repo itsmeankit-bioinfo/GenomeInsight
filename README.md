@@ -1,208 +1,180 @@
 # 🧬 GenomeInsight
 
-A modern command-line toolkit for bioinformatics sequence analysis, genome annotation, and molecular biology workflows.
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-orange.svg)
+![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen.svg)
+![Tests](https://img.shields.io/badge/Tests-35%20Passing-success)
+![CI](https://img.shields.io/badge/CI-GitHub%20Actions-blue)
 
-GenomeInsight provides fast, lightweight, and easy-to-use tools for working with DNA, RNA, and protein sequences directly from the command line.
+A modern Python command-line toolkit for **genomics, sequence analysis, and bioinformatics workflows**.
 
----
+GenomeInsight provides a modular command-line interface (CLI) for DNA, RNA, protein, and genomics analysis. It includes sequence statistics, FASTA/FASTQ/GFF parsing, ORF detection, motif searching, primer analysis, protein physicochemical analysis, sequence alignment, quality control, and workflow automation.
 
-## ✨ Features
-
-### 🧬 Sequence Analysis
-
-- GC Content
-- Reverse Complement
-- DNA → RNA Transcription
-- DNA → Protein Translation
-- Open Reading Frame (ORF) Finder
-- K-mer Analysis
-- Motif Search
+The project is designed as an open-source bioinformatics toolkit for students, researchers, and developers.
 
 ---
 
-### 🧪 Primer Design
+# 🚀 Features
 
-- Primer Statistics
-- Melting Temperature (Tm)
-- GC Percentage
-- Primer Length
+## 🧬 Sequence Analysis
 
----
-
-### 🔬 Restriction Enzyme Analysis
-
-- Restriction Site Detection
-- Enzyme Recognition Analysis
+- ✅ GC Content Calculation
+- ✅ Reverse Complement
+- ✅ DNA → RNA Transcription
+- ✅ DNA → Protein Translation
+- ✅ Sequence Statistics
 
 ---
 
-### 📁 File Format Support
+## 📁 File Processing
 
-- FASTA
-- FASTQ
-- GFF
-
----
-
-### 🧬 Protein Analysis
-
-- Protein Summary
-- Amino Acid Composition
-- Molecular Weight
-- Isoelectric Point (pI)
-- GRAVY (Hydrophobicity)
-- Aromaticity
-- Instability Index
+- ✅ FASTA Parser
+- ✅ FASTQ Parser
+- ✅ FASTA Validation
+- ✅ GFF Parser
 
 ---
 
-### 🧪 Sequence Alignment
+## 🧪 Protein Analysis
 
-- Global Alignment
-- Local Alignment
-
----
-
-### 📊 Quality Control
-
-- Read Quality Statistics
-- N50 Calculation
-- FastQC Integration
+- ✅ Protein Summary
+- ✅ Amino Acid Composition
+- ✅ Molecular Weight
+- ✅ Isoelectric Point (pI)
+- ✅ Aromaticity
+- ✅ Instability Index
+- ✅ GRAVY Score
 
 ---
 
-## 📦 Installation
+## 🧬 Bioinformatics Algorithms
+
+- ✅ ORF Finder
+- ✅ K-mer Counter
+- ✅ Motif Search
+- ✅ Restriction Enzyme Analysis
+- ✅ Primer Analysis
+- ✅ Global Sequence Alignment
+- ✅ Local Sequence Alignment
+- ✅ N50 Calculation
+- ✅ Read Quality Analysis
+
+---
+
+## ⚙️ External Tool Integration
+
+- ✅ FastQC
+
+Upcoming integrations
+
+- ⏳ Fastp
+- ⏳ BWA
+- ⏳ SAMtools
+- ⏳ SPAdes
+- ⏳ QUAST
+- ⏳ Prokka
+- ⏳ BLAST
+
+---
+
+# 📦 Installation
 
 Clone the repository
 
 ```bash
 git clone https://github.com/itsmeankit-bioinfo/GenomeInsight.git
+
 cd GenomeInsight
-```
-
-Create a virtual environment
-
-```bash
-python -m venv .venv
-```
-
-Activate
-
-### Windows
-
-```bash
-.venv\Scripts\activate
-```
-
-### Linux / macOS
-
-```bash
-source .venv/bin/activate
 ```
 
 Install dependencies
 
 ```bash
-pip install -e .
+python -m pip install -r requirements.txt
+```
+
+Install GenomeInsight
+
+```bash
+python -m pip install -e .
+```
+
+Verify installation
+
+```bash
+genomeinsight --version
 ```
 
 ---
 
-## 🚀 Usage
+# ⚡ Quick Start
 
-Display help
-
-```bash
-genomeinsight --help
-```
-
----
-
-## 🧬 DNA Commands
-
-GC Content
+Calculate GC content
 
 ```bash
-genomeinsight gc examples/sample.fasta
+genomeinsight gc ACTGACTG
 ```
 
-Reverse Complement
+Reverse complement
 
 ```bash
-genomeinsight reverse examples/sample.fasta
+genomeinsight reverse ACTGACTG
 ```
 
-Transcription
+DNA transcription
 
 ```bash
-genomeinsight transcribe examples/sample.fasta
+genomeinsight transcribe ACTGACTG
 ```
 
-Translation
+DNA translation
 
 ```bash
-genomeinsight translate examples/sample.fasta
+genomeinsight translate ATGGCC
 ```
 
-ORF Finder
+Sequence statistics
 
 ```bash
-genomeinsight orf examples/sample.fasta
+genomeinsight stats ACTGACTG
 ```
 
-Motif Search
-
-```bash
-genomeinsight motif examples/sample.fasta ATG
-```
-
-K-mer Analysis
-
-```bash
-genomeinsight kmer examples/sample.fasta 4
-```
-
----
-
-## 🧪 Primer Analysis
-
-```bash
-genomeinsight primer ACTGACTGACTG
-```
-
----
-
-## 🔬 Restriction Analysis
-
-```bash
-genomeinsight restriction examples/sample.fasta
-```
-
----
-
-## 📁 File Utilities
-
-FASTA Information
+Read a FASTA file
 
 ```bash
 genomeinsight fasta examples/sample.fasta
 ```
 
-FASTQ Statistics
+Read a FASTQ file
 
 ```bash
 genomeinsight fastq examples/sample.fastq
 ```
 
-GFF Summary
+Find ORFs
 
 ```bash
-genomeinsight gff examples/sample.gff
+genomeinsight orf examples/sample.fasta
 ```
 
----
+Find Motifs
 
-## 🧬 Protein Analysis
+```bash
+genomeinsight motif examples/sample.fasta ATG
+```
+
+Count K-mers
+
+```bash
+genomeinsight kmer examples/sample.fasta 4
+```
+
+Run FastQC
+
+```bash
+genomeinsight fastqc examples/sample.fastq
+```
 
 Protein Summary
 
@@ -210,37 +182,37 @@ Protein Summary
 genomeinsight protein info examples/protein.fasta
 ```
 
-Amino Acid Composition
+Protein Composition
 
 ```bash
 genomeinsight protein composition examples/protein.fasta
 ```
 
-Molecular Weight
+Protein Molecular Weight
 
 ```bash
 genomeinsight protein mw examples/protein.fasta
 ```
 
-Isoelectric Point
+Protein Isoelectric Point
 
 ```bash
 genomeinsight protein pi examples/protein.fasta
 ```
 
-GRAVY
+Protein GRAVY
 
 ```bash
 genomeinsight protein gravy examples/protein.fasta
 ```
 
-Aromaticity
+Protein Aromaticity
 
 ```bash
 genomeinsight protein aromaticity examples/protein.fasta
 ```
 
-Instability Index
+Protein Instability
 
 ```bash
 genomeinsight protein instability examples/protein.fasta
@@ -248,56 +220,38 @@ genomeinsight protein instability examples/protein.fasta
 
 ---
 
-## 📊 Quality Control
+# 📂 Project Structure
 
-N50
-
-```bash
-genomeinsight n50 assembly.fasta
-```
-
-Read Quality
-
-```bash
-genomeinsight quality reads.fastq
-```
-
-FastQC
-
-```bash
-genomeinsight fastqc reads.fastq
-```
-
----
-
-## 🧪 Sequence Alignment
-
-Global Alignment
-
-```bash
-genomeinsight align seq1.fasta seq2.fasta
-```
-
-Local Alignment
-
-```bash
-genomeinsight localalign seq1.fasta seq2.fasta
+```text
+GenomeInsight/
+│
+├── .github/
+│   └── workflows/
+│       └── tests.yml
+│
+├── docs/
+├── examples/
+├── tests/
+│
+├── genomeinsight/
+│   ├── analysis/
+│   ├── commands/
+│   ├── io/
+│   ├── pipeline/
+│   ├── utils/
+│   ├── cli.py
+│   └── __init__.py
+│
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── pyproject.toml
+└── pytest.ini
 ```
 
 ---
 
-## 🛠️ Technology Stack
-
-- Python 3.11+
-- BioPython
-- Click
-- Pytest
-- Ruff
-- GitHub Actions
-
----
-
-## 🧪 Testing
+# 🧪 Testing
 
 Run all tests
 
@@ -313,77 +267,133 @@ python -m ruff check .
 
 ---
 
-## 📂 Project Structure
-
-```
-GenomeInsight/
-│
-├── genomeinsight/
-│   ├── analysis/
-│   ├── commands/
-│   ├── io/
-│   └── utils/
-│
-├── tests/
-├── examples/
-├── docs/
-├── .github/
-└── README.md
-```
-
----
-
-## 📈 Current Status
+# 📊 Current Project Status
 
 Current Version
 
 **v0.2.0**
 
-Implemented
+### Statistics
 
 - ✅ 35 Automated Tests
-- ✅ GitHub Actions CI
 - ✅ Ruff Linting
+- ✅ GitHub Actions CI
 - ✅ Modular CLI Architecture
-- ✅ DNA Analysis
+
+### Implemented Modules
+
+- ✅ Sequence Analysis
+- ✅ File Processing
 - ✅ Protein Analysis
-- ✅ File Parsers
 - ✅ Sequence Alignment
-- ✅ Quality Control Tools
+- ✅ Quality Control
 
 ---
 
-## 🚀 Roadmap
+# ⚙️ Continuous Integration
 
-Upcoming features
+GenomeInsight uses **GitHub Actions** for automated testing.
+
+Every push automatically:
+
+- Installs dependencies
+- Runs Ruff
+- Executes all unit tests
+
+---
+
+# 🛠 Technologies Used
+
+- Python
+- BioPython
+- argparse
+- Pytest
+- Ruff
+- Git
+- GitHub
+- GitHub Actions
+
+---
+
+# 📈 Development Roadmap
+
+## Version 0.3
 
 - GenBank Parser
 - VCF Parser
-- SAM/BAM Statistics
+- Protein Property Expansion
+- HTML Report Generation
+
+---
+
+## Version 0.4
+
 - BLAST Output Parser
+- SAM/BAM Statistics
+- Multiple Sequence Alignment
 - Phylogenetic Analysis
-- HTML Reports
-- Workflow Pipeline
-- Plugin System
 
 ---
 
-## 🤝 Contributing
+## Version 1.0
 
-Contributions, feature requests, and bug reports are welcome.
+- Stable Release
+- PyPI Package
+- Conda Package
+- Docker Support
+- Plugin Architecture
+- Workflow Engine
 
 ---
 
-## 📄 License
+# 🤝 Contributing
 
-MIT License
+Contributions are welcome.
+
+1. Fork the repository
+
+2. Create a feature branch
+
+```bash
+git checkout -b feature/new-feature
+```
+
+3. Commit changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push
+
+```bash
+git push origin feature/new-feature
+```
+
+5. Open a Pull Request
 
 ---
 
-## 👨‍💻 Author
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+# 👨‍💻 Author
 
 **Ankit Raj**
 
 M.Sc. Bioinformatics
 
-GenomeInsight is an open-source bioinformatics toolkit developed for learning, research, and genomics workflows.
+GitHub:
+
+https://github.com/itsmeankit-bioinfo
+
+---
+
+# ⭐ Support
+
+If you find GenomeInsight useful, consider giving the repository a ⭐ on GitHub.
+
+It helps others discover the project and supports future development.
