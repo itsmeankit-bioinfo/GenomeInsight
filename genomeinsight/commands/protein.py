@@ -1,16 +1,12 @@
 """
-Protein analysis command.
+Protein analysis CLI command.
 """
 
-from genomeinsight.analysis.protein import protein_info
+from genomeinsight.analysis.protein import analyze_protein
 from genomeinsight.io.fasta import read_fasta
 
 
-def run_protein(args):
-    """
-    Run protein analysis on a FASTA file.
-    """
-
+def run_info(args):
     proteins = read_fasta(args.file)
 
     if not proteins:
@@ -18,7 +14,7 @@ def run_protein(args):
         return
 
     for protein in proteins:
-        result = protein_info(protein["sequence"])
+        result = analyze_protein(protein["sequence"])
 
         print("=" * 60)
         print(f"Protein ID        : {protein['id']}")
@@ -31,18 +27,24 @@ def run_protein(args):
 
 
 def register(subparsers):
-    """
-    Register the protein command.
-    """
-
-    parser = subparsers.add_parser(
+    protein_parser = subparsers.add_parser(
         "protein",
-        help="Analyze protein sequences from a FASTA file",
+        help="Protein sequence analysis",
     )
 
-    parser.add_argument(
+    protein_subparsers = protein_parser.add_subparsers(
+        dest="protein_command",
+        required=True,
+    )
+
+    info_parser = protein_subparsers.add_parser(
+        "info",
+        help="Protein summary",
+    )
+
+    info_parser.add_argument(
         "file",
         help="Protein FASTA file",
     )
 
-    parser.set_defaults(func=run_protein)
+    info_parser.set_defaults(func=run_info)

@@ -1,23 +1,13 @@
 """
-Protein sequence analysis utilities.
+Protein analysis utilities.
 """
 
 from Bio.SeqUtils.ProtParam import ProteinAnalysis
 
 
-def protein_info(sequence: str) -> dict:
+def analyze_protein(sequence: str) -> dict:
     """
-    Analyze a protein sequence.
-
-    Parameters
-    ----------
-    sequence : str
-        Protein sequence.
-
-    Returns
-    -------
-    dict
-        Protein statistics.
+    Perform comprehensive protein analysis.
     """
 
     sequence = sequence.upper()
@@ -27,24 +17,19 @@ def protein_info(sequence: str) -> dict:
     return {
         "length": len(sequence),
         "molecular_weight": round(
-            analysis.molecular_weight(),
-            2,
+            analysis.molecular_weight(), 2
         ),
         "isoelectric_point": round(
-            analysis.isoelectric_point(),
-            2,
+            analysis.isoelectric_point(), 2
         ),
         "aromaticity": round(
-            analysis.aromaticity(),
-            4,
+            analysis.aromaticity(), 4
         ),
         "instability_index": round(
-            analysis.instability_index(),
-            2,
+            analysis.instability_index(), 2
         ),
         "gravy": round(
-            analysis.gravy(),
-            3,
+            analysis.gravy(), 3
         ),
-        "amino_acids": analysis.count_amino_acids(),
+        "amino_acid_composition": analysis.count_amino_acids(),
     }
