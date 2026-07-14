@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+title: "GenomeInsight"
+message: "If you use GenomeInsight in your research or teaching, please cite this software."
+type: software
+
+authors:
+  - family-names: Raj
+    given-names: Ankit
+
+repository-code: "https://github.com/itsmeankit-bioinfo/GenomeInsight"
+
+license: MIT
+
+version: 0.3.0
+date-released: 2026-07-15
