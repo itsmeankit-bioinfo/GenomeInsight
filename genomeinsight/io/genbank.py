@@ -73,3 +73,30 @@ def read_genes(file_path: str) -> list:
             )
 
     return genes
+
+def read_cds(file_path: str) -> list:
+    """
+    Read all CDS annotations from a GenBank file.
+    """
+
+    record = SeqIO.read(file_path, "genbank")
+
+    cds_list = []
+
+    for feature in record.features:
+        if feature.type == "CDS":
+            cds_list.append(
+                {
+                    "gene": feature.qualifiers.get(
+                        "gene",
+                        ["Unknown"],
+                    )[0],
+                    "product": feature.qualifiers.get(
+                        "product",
+                        ["Unknown"],
+                    )[0],
+                    "location": str(feature.location),
+                }
+            )
+
+    return cds_list

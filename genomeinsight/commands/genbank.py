@@ -5,6 +5,7 @@ GenBank CLI commands.
 from genomeinsight.io.genbank import (
     read_genbank,
     read_genes,
+    read_cds,
 )
 
 def run_info(args):
@@ -50,6 +51,31 @@ def run_genes(args):
             f"{gene['location']}"
         )
 
+def run_cds(args):
+    """
+    Display coding DNA sequences (CDS).
+    """
+
+    cds_list = read_cds(args.file)
+
+    print("=" * 80)
+    print("Coding DNA Sequences (CDS)")
+    print("=" * 80)
+
+    if not cds_list:
+        print("No CDS annotations found.")
+        return
+
+    print(f"{'Gene':20}{'Product':35}Location")
+    print("-" * 80)
+
+    for cds in cds_list:
+        print(
+            f"{cds['gene']:20}"
+            f"{cds['product'][:34]:35}"
+            f"{cds['location']}"
+        )
+
 
 def register(subparsers):
     """
@@ -90,3 +116,16 @@ def register(subparsers):
     )
 
     genes_parser.set_defaults(func=run_genes)
+
+    cds_parser = genbank_subparsers.add_parser(
+    "cds",
+    help="Display coding DNA sequences",
+    )
+
+    cds_parser.add_argument(
+    "file",
+    metavar="GENBANK",
+    help="GenBank file",
+    )
+
+    cds_parser.set_defaults(func=run_cds)
