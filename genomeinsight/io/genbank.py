@@ -40,3 +40,36 @@ def read_genbank(file_path: str) -> dict:
             "Unknown",
         ),
     }
+
+def read_genes(file_path: str) -> list:
+    """
+    Read all gene annotations from a GenBank file.
+
+    Parameters
+    ----------
+    file_path : str
+        Path to a GenBank file.
+
+    Returns
+    -------
+    list
+        List of genes.
+    """
+
+    record = SeqIO.read(file_path, "genbank")
+
+    genes = []
+
+    for feature in record.features:
+        if feature.type == "gene":
+            genes.append(
+                {
+                    "gene": feature.qualifiers.get(
+                        "gene",
+                        ["Unknown"],
+                    )[0],
+                    "location": str(feature.location),
+                }
+            )
+
+    return genes
