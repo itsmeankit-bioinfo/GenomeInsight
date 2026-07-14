@@ -100,3 +100,43 @@ def read_cds(file_path: str) -> list:
             )
 
     return cds_list
+
+def read_proteins(file_path: str) -> list:
+    """
+    Read translated protein information from a GenBank file.
+
+    Parameters
+    ----------
+    file_path : str
+        Path to a GenBank file.
+
+    Returns
+    -------
+    list
+        Protein annotations.
+    """
+
+    record = SeqIO.read(file_path, "genbank")
+
+    proteins = []
+
+    for feature in record.features:
+        if feature.type == "CDS":
+            proteins.append(
+                {
+                    "gene": feature.qualifiers.get(
+                        "gene",
+                        ["Unknown"],
+                    )[0],
+                    "protein_id": feature.qualifiers.get(
+                        "protein_id",
+                        ["Unknown"],
+                    )[0],
+                    "product": feature.qualifiers.get(
+                        "product",
+                        ["Unknown"],
+                    )[0],
+                }
+            )
+
+    return proteins

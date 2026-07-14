@@ -6,6 +6,7 @@ from genomeinsight.io.genbank import (
     read_genbank,
     read_genes,
     read_cds,
+    read_proteins,
 )
 
 def run_info(args):
@@ -76,6 +77,31 @@ def run_cds(args):
             f"{cds['location']}"
         )
 
+def run_proteins(args):
+    """
+    Display protein annotations from a GenBank file.
+    """
+
+    proteins = read_proteins(args.file)
+
+    print("=" * 90)
+    print("Proteins")
+    print("=" * 90)
+
+    if not proteins:
+        print("No protein annotations found.")
+        return
+
+    print(f"{'Gene':20}{'Protein ID':25}Product")
+    print("-" * 90)
+
+    for protein in proteins:
+        print(
+            f"{protein['gene']:20}"
+            f"{protein['protein_id']:25}"
+            f"{protein['product']}"
+        )
+
 
 def register(subparsers):
     """
@@ -129,3 +155,16 @@ def register(subparsers):
     )
 
     cds_parser.set_defaults(func=run_cds)
+
+    proteins_parser = genbank_subparsers.add_parser(
+        "proteins",
+        help="Display protein annotations",
+    )
+
+    proteins_parser.add_argument(
+        "file",
+        metavar="GENBANK",
+        help="GenBank file",
+    )
+
+    proteins_parser.set_defaults(func=run_proteins)
