@@ -7,6 +7,7 @@ from genomeinsight.io.genbank import (
     read_genes,
     read_cds,
     read_proteins,
+    read_features,
 )
 
 def run_info(args):
@@ -102,6 +103,22 @@ def run_proteins(args):
             f"{protein['product']}"
         )
 
+def run_features(args):
+    """
+    Display feature summary from a GenBank file.
+    """
+
+    features = read_features(args.file)
+
+    print("=" * 60)
+    print("GenBank Feature Summary")
+    print("=" * 60)
+
+    print(f"{'Feature Type':25}Count")
+    print("-" * 60)
+
+    for feature, count in sorted(features.items()):
+        print(f"{feature:25}{count}")
 
 def register(subparsers):
     """
@@ -168,3 +185,16 @@ def register(subparsers):
     )
 
     proteins_parser.set_defaults(func=run_proteins)
+
+    features_parser = genbank_subparsers.add_parser(
+        "features",
+        help="Display GenBank feature summary",
+    )
+
+    features_parser.add_argument(
+        "file",
+        metavar="GENBANK",
+        help="GenBank file",
+    )
+
+    features_parser.set_defaults(func=run_features)

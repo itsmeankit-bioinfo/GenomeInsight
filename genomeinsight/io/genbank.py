@@ -1,6 +1,7 @@
 """
 GenBank file reader.
 """
+from collections import Counter
 
 from Bio import SeqIO
 
@@ -140,3 +141,28 @@ def read_proteins(file_path: str) -> list:
             )
 
     return proteins
+
+
+def read_features(file_path: str) -> dict:
+    """
+    Count feature types in a GenBank file.
+
+    Parameters
+    ----------
+    file_path : str
+        Path to a GenBank file.
+
+    Returns
+    -------
+    dict
+        Feature counts.
+    """
+
+    record = SeqIO.read(file_path, "genbank")
+
+    counter = Counter()
+
+    for feature in record.features:
+        counter[feature.type] += 1
+
+    return dict(counter)
