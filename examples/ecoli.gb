@@ -1,0 +1,23 @@
+LOCUS       U00096_FRAG              120 bp    DNA     circular BCT 14-JUL-2026
+DEFINITION  Escherichia coli str. K-12 substr. MG1655, complete genome fragment.
+ACCESSION   U00096
+VERSION     U00096.3
+KEYWORDS    .
+SOURCE      Escherichia coli str. K-12 substr. MG1655
+  ORGANISM  Escherichia coli str. K-12 substr. MG1655
+            Bacteria; Pseudomonadota; Gammaproteobacteria; Enterobacterales;
+            Enterobacteriaceae; Escherichia.
+FEATURES             Location/Qualifiers
+     source          1..120
+                     /organism="Escherichia coli str. K-12 substr. MG1655"
+                     /mol_type="genomic DNA"
+                     /strain="K-12"
+                     /sub_strain="MG1655"
+                     /db_xref="taxon:511145"
+     gene            1..120
+                     /gene="thrL"
+                     /locus_tag="b0001"
+ORIGIN      
+        1 agcttttcat tctgactgca acgggcaata tgtctctgtg tggattaaaa aaagagtgtc
+       61 tgatagcagc ttctgaactg gttacctgcc gtgagtaaat taaaatttta ttgacttagg
+//

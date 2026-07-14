@@ -238,23 +238,6 @@ def register(subparsers):
     pi_parser.set_defaults(func=run_pi)
 
     #------------------------------------------------------------
-    # protein pi
-    #------------------------------------------------------------
-    pi_parser = protein_subparsers.add_parser(
-        "pi",
-        help="Calculate isoelectric point",
-        description="Calculate isoelectric point (pI) of protein sequences.",
-    )
-
-    pi_parser.add_argument(
-        "file",
-        metavar="FASTA",
-        help="Protein FASTA file",
-    )   
-
-    pi_parser.set_defaults(func=run_pi)
-
-    #------------------------------------------------------------
     # protein gravy
     #------------------------------------------------------------
     gravy_parser = protein_subparsers.add_parser(

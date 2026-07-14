@@ -24,6 +24,7 @@ from genomeinsight.commands import (
     translate,
     validate,
     protein,
+    genbank,
 )
 
 
@@ -80,6 +81,7 @@ def main():
     n50.register(subparsers)
     quality.register(subparsers)
     protein.register(subparsers)
+    genbank.register(subparsers)
 
     # ==========================
     # External Tools
