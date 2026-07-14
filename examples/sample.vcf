@@ -1,0 +1,8 @@
+##fileformat=VCFv4.2
+##source=GenomeInsight
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+chr1	100	.	A	G	99	PASS	.
+chr1	200	.	T	C	80	PASS	.
+chr1	350	.	G	GA	70	PASS	.
+chr1	500	.	AT	A	65	PASS	.
+chr2	120	.	C	T	90	PASS	.

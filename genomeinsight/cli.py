@@ -25,6 +25,7 @@ from genomeinsight.commands import (
     validate,
     protein,
     genbank,
+    vcf,
 )
 
 
@@ -82,6 +83,7 @@ def main():
     quality.register(subparsers)
     protein.register(subparsers)
     genbank.register(subparsers)
+    vcf.register(subparsers)
 
     # ==========================
     # External Tools
