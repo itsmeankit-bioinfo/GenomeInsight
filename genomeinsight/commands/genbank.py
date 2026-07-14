@@ -2,8 +2,10 @@
 GenBank CLI commands.
 """
 
-from genomeinsight.io.genbank import read_genbank
-
+from genomeinsight.io.genbank import (
+    read_genbank,
+    read_genes,
+)
 
 def run_info(args):
     """
@@ -23,6 +25,30 @@ def run_info(args):
     print(f"Length        : {info['length']} bp")
     print(f"Molecule Type : {info['molecule_type']}")
     print(f"Topology      : {info['topology']}")
+
+def run_genes(args):
+    """
+    Display gene annotations.
+    """
+
+    genes = read_genes(args.file)
+
+    print("=" * 60)
+    print("Genes")
+    print("=" * 60)
+
+    if not genes:
+        print("No gene annotations found.")
+        return
+
+    print(f"{'Gene':20}Location")
+    print("-" * 60)
+
+    for gene in genes:
+        print(
+            f"{gene['gene']:20}"
+            f"{gene['location']}"
+        )
 
 
 def register(subparsers):
@@ -51,3 +77,16 @@ def register(subparsers):
     )
 
     info_parser.set_defaults(func=run_info)
+
+    genes_parser = genbank_subparsers.add_parser(
+    "genes",
+    help="Display gene annotations",
+    )
+
+    genes_parser.add_argument(
+    "file",
+    metavar="GENBANK",
+    help="GenBank file",
+    )
+
+    genes_parser.set_defaults(func=run_genes)
