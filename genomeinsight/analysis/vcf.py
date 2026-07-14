@@ -33,3 +33,29 @@ def variant_statistics(variants):
         "insertions": insertions,
         "deletions": deletions,
     }
+
+def extract_snps(variants):
+    """
+    Extract SNP variants.
+
+    Parameters
+    ----------
+    variants : list
+        Parsed VCF variants.
+
+    Returns
+    -------
+    list
+        SNP variants.
+    """
+
+    snps = []
+
+    for variant in variants:
+        if (
+            len(variant["ref"]) == 1
+            and len(variant["alt"]) == 1
+        ):
+            snps.append(variant)
+
+    return snps

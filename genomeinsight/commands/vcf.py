@@ -3,7 +3,10 @@ VCF CLI commands for GenomeInsight.
 """
 
 from genomeinsight.io.vcf import read_vcf
-from genomeinsight.analysis.vcf import variant_statistics
+from genomeinsight.analysis.vcf import (
+    variant_statistics, 
+    extract_snps
+)
 
 
 def run_stats(args):
@@ -23,6 +26,32 @@ def run_stats(args):
     print(f"Insertions     : {stats['insertions']}")
     print(f"Deletions      : {stats['deletions']}")
 
+def run_snps(args):
+    """
+    Display SNP variants from a VCF file.
+    """
+
+    variants = read_vcf(args.file)
+    snps = extract_snps(variants)
+
+    print("=" * 60)
+    print("SNP Variants")
+    print("=" * 60)
+
+    if not snps:
+        print("No SNP variants found.")
+        return
+
+    print(f"{'Chrom':12}{'Position':12}{'REF':8}{'ALT'}")
+    print("-" * 60)
+
+    for snp in snps:
+        print(
+            f"{snp['chrom']:12}"
+            f"{snp['pos']:12}"
+            f"{snp['ref']:8}"
+            f"{snp['alt']}"
+        )
 
 def register(subparsers):
     """
@@ -51,3 +80,16 @@ def register(subparsers):
     )
 
     stats_parser.set_defaults(func=run_stats)
+
+    snps_parser = vcf_subparsers.add_parser(
+        "snps",
+        help="Display SNP variants",
+    )
+
+    snps_parser.add_argument(
+        "file",
+        metavar="VCF",
+        help="VCF file",
+    )
+
+    snps_parser.set_defaults(func=run_snps)
