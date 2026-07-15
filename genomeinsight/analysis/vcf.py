@@ -140,3 +140,49 @@ def generate_summary(variants):
         "statistics": variant_statistics(variants),
         "chromosomes": chromosome_statistics(variants),
     }
+
+def transition_transversion_ratio(variants):
+    """
+    Calculate transition and transversion statistics.
+
+    Parameters
+    ----------
+    variants : list
+        Parsed VCF variants.
+
+    Returns
+    -------
+    dict
+        Transition/transversion statistics.
+    """
+
+    transitions = {
+        ("A", "G"),
+        ("G", "A"),
+        ("C", "T"),
+        ("T", "C"),
+    }
+
+    ts = 0
+    tv = 0
+
+    for variant in variants:
+        ref = variant["ref"]
+        alt = variant["alt"]
+
+        # Only SNPs are considered
+        if len(ref) != 1 or len(alt) != 1:
+            continue
+
+        if (ref, alt) in transitions:
+            ts += 1
+        else:
+            tv += 1
+
+    ratio = ts / tv if tv else None
+
+    return {
+        "transitions": ts,
+        "transversions": tv,
+        "ratio": ratio,
+    }

@@ -9,6 +9,7 @@ from genomeinsight.analysis.vcf import (
     extract_indels,
     chromosome_statistics,
     generate_summary,
+    transition_transversion_ratio,
 )
 
 
@@ -135,6 +136,28 @@ def run_summary(args):
     for chrom, count in sorted(chromosomes.items()):
         print(f"{chrom:15}: {count}")
 
+def run_tstv(args):
+    """
+    Display transition/transversion statistics.
+    """
+
+    variants = read_vcf(args.file)
+    stats = transition_transversion_ratio(variants)
+
+    print("=" * 60)
+    print("Transition / Transversion Statistics")
+    print("=" * 60)
+
+    print(f"Transitions     : {stats['transitions']}")
+    print(f"Transversions   : {stats['transversions']}")
+
+    print()
+
+    if stats["ratio"] is None:
+        print("Ts/Tv Ratio     : Undefined")
+    else:
+        print(f"Ts/Tv Ratio     : {stats['ratio']:.2f}")
+
 def register(subparsers):
     """
     Register VCF commands.
@@ -216,3 +239,15 @@ def register(subparsers):
 
     summary_parser.set_defaults(func=run_summary)
     
+    tstv_parser = vcf_subparsers.add_parser(
+        "tstv",
+        help="Calculate transition/transversion ratio",
+    )
+
+    tstv_parser.add_argument(
+        "file",
+        metavar="VCF",
+        help="VCF file",
+    )
+
+    tstv_parser.set_defaults(func=run_tstv)
