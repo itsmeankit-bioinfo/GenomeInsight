@@ -8,6 +8,7 @@ from genomeinsight.analysis.vcf import (
     extract_snps,
     extract_indels,
     chromosome_statistics,
+    generate_summary,
 )
 
 
@@ -105,6 +106,35 @@ def run_chromosomes(args):
     for chrom, count in sorted(chromosomes.items()):
         print(f"{chrom:20}{count}")
 
+def run_summary(args):
+    """
+    Display a complete VCF summary.
+    """
+
+    variants = read_vcf(args.file)
+    summary = generate_summary(variants)
+
+    stats = summary["statistics"]
+    chromosomes = summary["chromosomes"]
+
+    print("=" * 60)
+    print("VCF Summary")
+    print("=" * 60)
+
+    print("\nGeneral Statistics")
+    print("-" * 60)
+    print(f"Total Variants : {stats['variants']}")
+    print(f"Chromosomes    : {stats['chromosomes']}")
+    print(f"SNPs           : {stats['snps']}")
+    print(f"Insertions     : {stats['insertions']}")
+    print(f"Deletions      : {stats['deletions']}")
+
+    print("\nVariants by Chromosome")
+    print("-" * 60)
+
+    for chrom, count in sorted(chromosomes.items()):
+        print(f"{chrom:15}: {count}")
+
 def register(subparsers):
     """
     Register VCF commands.
@@ -171,4 +201,18 @@ def register(subparsers):
     )
 
     chromosomes_parser.set_defaults(func=run_chromosomes)
+
+
+    summary_parser = vcf_subparsers.add_parser(
+        "summary",
+        help="Display a complete VCF summary",
+    )
+
+    summary_parser.add_argument(
+        "file",
+        metavar="VCF",
+        help="VCF file",
+    )
+
+    summary_parser.set_defaults(func=run_summary)
     

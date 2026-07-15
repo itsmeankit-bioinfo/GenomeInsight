@@ -120,3 +120,23 @@ def chromosome_statistics(variants):
         counts[variant["chrom"]] += 1
 
     return dict(counts)
+
+def generate_summary(variants):
+    """
+    Generate a complete summary of VCF variants.
+
+    Parameters
+    ----------
+    variants : list
+        Parsed VCF variants.
+
+    Returns
+    -------
+    dict
+        Combined VCF summary.
+    """
+
+    return {
+        "statistics": variant_statistics(variants),
+        "chromosomes": chromosome_statistics(variants),
+    }
