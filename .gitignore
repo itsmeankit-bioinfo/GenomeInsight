@@ -231,3 +231,4 @@ __pycache__/
 *.pyc
 
 *tree.txt
+*report.html
