@@ -186,3 +186,51 @@ def transition_transversion_ratio(variants):
         "transversions": tv,
         "ratio": ratio,
     }
+
+def filter_variants(
+    variants,
+    chromosome=None,
+    variant_type=None,
+):
+    """
+    Filter variants by chromosome and/or type.
+
+    Parameters
+    ----------
+    variants : list
+        Parsed VCF variants.
+
+    chromosome : str, optional
+        Chromosome name.
+
+    variant_type : str, optional
+        "snp" or "indel".
+
+    Returns
+    -------
+    list
+        Filtered variants.
+    """
+
+    filtered = []
+
+    for variant in variants:
+
+        if chromosome is not None:
+            if variant["chrom"] != chromosome:
+                continue
+
+        if variant_type == "snp":
+            if not (
+                len(variant["ref"]) == 1
+                and len(variant["alt"]) == 1
+            ):
+                continue
+
+        elif variant_type == "indel":
+            if len(variant["ref"]) == len(variant["alt"]):
+                continue
+
+        filtered.append(variant)
+
+    return filtered

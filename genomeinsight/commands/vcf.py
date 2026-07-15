@@ -10,6 +10,7 @@ from genomeinsight.analysis.vcf import (
     chromosome_statistics,
     generate_summary,
     transition_transversion_ratio,
+    filter_variants,
 )
 
 
@@ -158,6 +159,38 @@ def run_tstv(args):
     else:
         print(f"Ts/Tv Ratio     : {stats['ratio']:.2f}")
 
+def run_filter(args):
+    """
+    Filter variants by chromosome and/or type.
+    """
+
+    variants = read_vcf(args.file)
+
+    filtered = filter_variants(
+        variants,
+        chromosome=args.chrom,
+        variant_type=args.type,
+    )
+
+    print("=" * 70)
+    print("Filtered Variants")
+    print("=" * 70)
+
+    if not filtered:
+        print("No variants matched the filter.")
+        return
+
+    print(f"{'Chrom':12}{'Position':12}{'REF':8}{'ALT'}")
+    print("-" * 70)
+
+    for variant in filtered:
+        print(
+            f"{variant['chrom']:12}"
+            f"{variant['pos']:12}"
+            f"{variant['ref']:8}"
+            f"{variant['alt']}"
+        )
+
 def register(subparsers):
     """
     Register VCF commands.
@@ -251,3 +284,27 @@ def register(subparsers):
     )
 
     tstv_parser.set_defaults(func=run_tstv)
+
+    filter_parser = vcf_subparsers.add_parser(
+    "filter",
+    help="Filter VCF variants",
+    )
+
+    filter_parser.add_argument(
+        "file",
+        metavar="VCF",
+        help="VCF file",
+    )
+
+    filter_parser.add_argument(
+        "--chrom",
+        help="Filter by chromosome",
+    )
+
+    filter_parser.add_argument(
+        "--type",
+        choices=["snp", "indel"],
+        help="Filter by variant type",
+    )
+
+    filter_parser.set_defaults(func=run_filter)
