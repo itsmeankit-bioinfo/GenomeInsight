@@ -59,3 +59,42 @@ def extract_snps(variants):
             snps.append(variant)
 
     return snps
+
+def extract_indels(variants):
+    """
+    Extract insertion and deletion variants.
+
+    Parameters
+    ----------
+    variants : list
+        Parsed VCF variants.
+
+    Returns
+    -------
+    list
+        INDEL variants.
+    """
+
+    indels = []
+
+    for variant in variants:
+        ref = variant["ref"]
+        alt = variant["alt"]
+
+        if len(ref) != len(alt):
+            if len(alt) > len(ref):
+                variant_type = "Insertion"
+            else:
+                variant_type = "Deletion"
+
+            indels.append(
+                {
+                    "chrom": variant["chrom"],
+                    "pos": variant["pos"],
+                    "ref": ref,
+                    "alt": alt,
+                    "type": variant_type,
+                }
+            )
+
+    return indels
