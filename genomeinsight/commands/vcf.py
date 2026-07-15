@@ -7,6 +7,7 @@ from genomeinsight.analysis.vcf import (
     variant_statistics, 
     extract_snps,
     extract_indels,
+    chromosome_statistics,
 )
 
 
@@ -82,6 +83,28 @@ def run_indels(args):
             f"{indel['type']}"
         )
 
+def run_chromosomes(args):
+    """
+    Display chromosome statistics from a VCF file.
+    """
+
+    variants = read_vcf(args.file)
+    chromosomes = chromosome_statistics(variants)
+
+    print("=" * 60)
+    print("Chromosome Statistics")
+    print("=" * 60)
+
+    if not chromosomes:
+        print("No variants found.")
+        return
+
+    print(f"{'Chromosome':20}Variants")
+    print("-" * 60)
+
+    for chrom, count in sorted(chromosomes.items()):
+        print(f"{chrom:20}{count}")
+
 def register(subparsers):
     """
     Register VCF commands.
@@ -135,3 +158,17 @@ def register(subparsers):
     )
 
     indels_parser.set_defaults(func=run_indels)
+
+    chromosomes_parser = vcf_subparsers.add_parser(
+        "chromosomes",
+        help="Display chromosome statistics",
+    )
+
+    chromosomes_parser.add_argument(
+        "file",
+        metavar="VCF",
+        help="VCF file",
+    )
+
+    chromosomes_parser.set_defaults(func=run_chromosomes)
+    

@@ -1,7 +1,7 @@
 """
 Variant analysis functions for GenomeInsight.
 """
-
+from collections import Counter
 
 def variant_statistics(variants):
     """
@@ -98,3 +98,25 @@ def extract_indels(variants):
             )
 
     return indels
+
+def chromosome_statistics(variants):
+    """
+    Count variants per chromosome.
+
+    Parameters
+    ----------
+    variants : list
+        Parsed VCF variants.
+
+    Returns
+    -------
+    dict
+        Chromosome -> variant count.
+    """
+
+    counts = Counter()
+
+    for variant in variants:
+        counts[variant["chrom"]] += 1
+
+    return dict(counts)
