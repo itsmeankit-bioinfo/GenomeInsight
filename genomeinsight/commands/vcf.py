@@ -1,7 +1,7 @@
 """
 VCF CLI commands for GenomeInsight.
 """
-
+from genomeinsight.io.export import export_csv
 from genomeinsight.io.vcf import read_vcf
 from genomeinsight.analysis.vcf import (
     variant_statistics, 
@@ -191,6 +191,29 @@ def run_filter(args):
             f"{variant['alt']}"
         )
 
+def run_export(args):
+    """
+    Export variants to supported formats.
+    """
+
+    variants = read_vcf(args.file)
+
+    output = args.output
+
+    if output is None:
+        output = f"variants.{args.format}"
+
+    if args.format == "csv":
+        export_csv(
+            variants,
+            output,
+        )
+
+    print()
+    print("✓ Export completed successfully")
+    print()
+    print(f"Saved to: {output}")
+
 def register(subparsers):
     """
     Register VCF commands.
@@ -308,3 +331,28 @@ def register(subparsers):
     )
 
     filter_parser.set_defaults(func=run_filter)
+
+    export_parser = vcf_subparsers.add_parser(
+        "export",
+        help="Export variants",
+    )
+
+    export_parser.add_argument(
+        "file",
+        metavar="VCF",
+        help="VCF file",
+    )
+
+    export_parser.add_argument(
+        "--format",
+        choices=["csv"],
+        required=True,
+        help="Export format",
+    )
+
+    export_parser.add_argument(
+        "--output",
+        help="Output filename",
+    )
+
+    export_parser.set_defaults(func=run_export)
