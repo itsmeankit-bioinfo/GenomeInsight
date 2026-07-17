@@ -215,7 +215,6 @@ Protein Isoelectric Point
 ```bash
 genomeinsight protein pi examples/protein.fasta
 ```
-
 Protein GRAVY
 
 ```bash
@@ -405,30 +404,30 @@ Every push automatically:
 
 ## Version 0.4
 
-- Multiple Sequence Alignment
-- Consensus Sequence
-- Alignment Statistics
-- BLAST Output Parser
+- ⏳ Multiple Sequence Alignment
+- ⏳ Consensus Sequence
+- ⏳ Alignment Statistics
+- ⏳ BLAST Output Parser
 
 ---
 
 ## Version 0.5
 
-- Phylogenetic Analysis
-- Pipeline Engine
-- Workflow Automation
-- HTML Report Generation
+- ⏳ Phylogenetic Analysis
+- ⏳ Pipeline Engine
+- ⏳ Workflow Automation
+- ⏳ HTML Report Generation
 
 ---
 
 ## Version 1.0
 
-- Stable Release
-- PyPI Package
-- Conda Package
-- Docker Support
-- Plugin Architecture
-- Complete Documentation
+- ⏳ Stable Release
+- ⏳ PyPI Package
+- ⏳ Conda Package
+- ⏳ Docker Support
+- ⏳ Plugin Architecture
+- ⏳ Complete Documentation
 
 ---
 
@@ -488,7 +487,7 @@ It helps others discover the project and supports future development.
 
 ## 📬 Contact
 
-If you have suggestions, find a bug, or want to contribute, feel free to:
+If you have suggestions, found a bug, or would like to contribute, feel free to:
 
 - Open an Issue
 - Submit a Pull Request
@@ -498,6 +497,12 @@ Your feedback and contributions are always welcome.
 
 ---
 
-**GenomeInsight** is an open-source bioinformatics toolkit built to simplify sequence analysis, genomic data processing, and computational biology workflows for students, researchers, and developers.
+## 🎯 Project Vision
 
-🚀 *Building one module at a time toward a powerful, production-ready bioinformatics toolkit.*
+GenomeInsight aims to become a comprehensive, open-source bioinformatics toolkit that simplifies sequence analysis, genomic data processing, and computational biology workflows through an easy-to-use command-line interface.
+
+The project is designed for students, researchers, educators, and developers who want a lightweight yet powerful toolkit for everyday bioinformatics tasks.
+
+---
+
+🚀 **Building one module at a time toward a production-ready bioinformatics toolkit.**
