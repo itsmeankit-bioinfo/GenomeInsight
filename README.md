@@ -4,12 +4,12 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-orange.svg)
 ![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen.svg)
-![Tests](https://img.shields.io/badge/Tests-35%20Passing-success)
+![Tests](https://img.shields.io/badge/Tests-46%20Passing-success)
 ![CI](https://img.shields.io/badge/CI-GitHub%20Actions-blue)
 
 A modern Python command-line toolkit for **genomics, sequence analysis, and bioinformatics workflows**.
 
-GenomeInsight provides a modular command-line interface (CLI) for DNA, RNA, protein, and genomics analysis. It includes sequence statistics, FASTA/FASTQ/GFF parsing, ORF detection, motif searching, primer analysis, protein physicochemical analysis, sequence alignment, quality control, and workflow automation.
+GenomeInsight provides a modular command-line interface (CLI) for DNA, RNA, protein, genomics, and variant analysis. It includes sequence statistics, FASTA/FASTQ/GFF/GenBank/VCF parsing, ORF detection, motif searching, primer analysis, protein physicochemical analysis, sequence alignment, quality control, and workflow automation.
 
 The project is designed as an open-source bioinformatics toolkit for students, researchers, and developers.
 
@@ -33,6 +33,8 @@ The project is designed as an open-source bioinformatics toolkit for students, r
 - ✅ FASTQ Parser
 - ✅ FASTA Validation
 - ✅ GFF Parser
+- ✅ GenBank Parser
+- ✅ VCF Parser
 
 ---
 
@@ -45,6 +47,20 @@ The project is designed as an open-source bioinformatics toolkit for students, r
 - ✅ Aromaticity
 - ✅ Instability Index
 - ✅ GRAVY Score
+
+---
+
+## 🧬 Variant Analysis
+
+- ✅ Variant Statistics
+- ✅ SNP Extraction
+- ✅ INDEL Extraction
+- ✅ Chromosome Statistics
+- ✅ VCF Summary
+- ✅ Transition / Transversion Ratio
+- ✅ Variant Filtering
+- ✅ CSV Export
+- ✅ JSON Export
 
 ---
 
@@ -218,6 +234,71 @@ Protein Instability
 genomeinsight protein instability examples/protein.fasta
 ```
 
+GenBank Summary
+
+```bash
+genomeinsight genbank info examples/sample.gb
+```
+
+GenBank Genes
+
+```bash
+genomeinsight genbank genes examples/sample.gb
+```
+
+GenBank Proteins
+
+```bash
+genomeinsight genbank proteins examples/sample.gb
+```
+
+VCF Summary
+
+```bash
+genomeinsight vcf summary examples/sample.vcf
+```
+
+SNP Extraction
+
+```bash
+genomeinsight vcf snps examples/sample.vcf
+```
+
+INDEL Extraction
+
+```bash
+genomeinsight vcf indels examples/sample.vcf
+```
+
+Chromosome Statistics
+
+```bash
+genomeinsight vcf chromosomes examples/sample.vcf
+```
+
+Transition / Transversion Ratio
+
+```bash
+genomeinsight vcf tstv examples/sample.vcf
+```
+
+Variant Filtering
+
+```bash
+genomeinsight vcf filter examples/sample.vcf --type snp
+```
+
+Export CSV
+
+```bash
+genomeinsight vcf export examples/sample.vcf --format csv
+```
+
+Export JSON
+
+```bash
+genomeinsight vcf export examples/sample.vcf --format json
+```
 ---
 
 # 📂 Project Structure
@@ -271,11 +352,11 @@ python -m ruff check .
 
 Current Version
 
-**v0.2.0**
+**v0.3.0**
 
 ### Statistics
 
-- ✅ 35 Automated Tests
+- ✅ 46 Automated Tests
 - ✅ Ruff Linting
 - ✅ GitHub Actions CI
 - ✅ Modular CLI Architecture
@@ -285,6 +366,9 @@ Current Version
 - ✅ Sequence Analysis
 - ✅ File Processing
 - ✅ Protein Analysis
+- ✅ GenBank Parser
+- ✅ VCF Parser
+- ✅ Variant Analysis
 - ✅ Sequence Alignment
 - ✅ Quality Control
 
@@ -312,26 +396,28 @@ Every push automatically:
 - Git
 - GitHub
 - GitHub Actions
+- CSV
+- JSON
 
 ---
 
 # 📈 Development Roadmap
 
-## Version 0.3
+## Version 0.4
 
-- GenBank Parser
-- VCF Parser
-- Protein Property Expansion
-- HTML Report Generation
+- Multiple Sequence Alignment
+- Consensus Sequence
+- Alignment Statistics
+- BLAST Output Parser
 
 ---
 
-## Version 0.4
+## Version 0.5
 
-- BLAST Output Parser
-- SAM/BAM Statistics
-- Multiple Sequence Alignment
 - Phylogenetic Analysis
+- Pipeline Engine
+- Workflow Automation
+- HTML Report Generation
 
 ---
 
@@ -342,7 +428,7 @@ Every push automatically:
 - Conda Package
 - Docker Support
 - Plugin Architecture
-- Workflow Engine
+- Complete Documentation
 
 ---
 
@@ -397,3 +483,21 @@ https://github.com/itsmeankit-bioinfo
 If you find GenomeInsight useful, consider giving the repository a ⭐ on GitHub.
 
 It helps others discover the project and supports future development.
+
+---
+
+## 📬 Contact
+
+If you have suggestions, find a bug, or want to contribute, feel free to:
+
+- Open an Issue
+- Submit a Pull Request
+- Reach out through GitHub
+
+Your feedback and contributions are always welcome.
+
+---
+
+**GenomeInsight** is an open-source bioinformatics toolkit built to simplify sequence analysis, genomic data processing, and computational biology workflows for students, researchers, and developers.
+
+🚀 *Building one module at a time toward a powerful, production-ready bioinformatics toolkit.*
