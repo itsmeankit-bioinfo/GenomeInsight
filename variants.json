@@ -1,0 +1,32 @@
+[
+    {
+        "chrom": "chr1",
+        "pos": 100,
+        "ref": "A",
+        "alt": "G"
+    },
+    {
+        "chrom": "chr1",
+        "pos": 200,
+        "ref": "T",
+        "alt": "C"
+    },
+    {
+        "chrom": "chr1",
+        "pos": 350,
+        "ref": "G",
+        "alt": "GA"
+    },
+    {
+        "chrom": "chr1",
+        "pos": 500,
+        "ref": "AT",
+        "alt": "A"
+    },
+    {
+        "chrom": "chr2",
+        "pos": 120,
+        "ref": "C",
+        "alt": "T"
+    }
+]

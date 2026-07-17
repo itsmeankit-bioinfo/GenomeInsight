@@ -3,6 +3,7 @@ Export utilities for GenomeInsight.
 """
 
 import csv
+import json
 
 
 def export_csv(variants, output_file):
@@ -39,3 +40,23 @@ def export_csv(variants, output_file):
                     variant["alt"],
                 ]
             )
+
+def export_json(variants, output_file):
+    """
+    Export variants to a JSON file.
+
+    Parameters
+    ----------
+    variants : list
+        Parsed variants.
+
+    output_file : str
+        Output JSON filename.
+    """
+
+    with open(output_file, "w", encoding="utf-8") as file:
+        json.dump(
+            variants,
+            file,
+            indent=4,
+        )

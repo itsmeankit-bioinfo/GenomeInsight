@@ -1,7 +1,11 @@
 """
 VCF CLI commands for GenomeInsight.
 """
-from genomeinsight.io.export import export_csv
+from genomeinsight.io.export import ( 
+    export_csv,
+    export_json,
+)
+
 from genomeinsight.io.vcf import read_vcf
 from genomeinsight.analysis.vcf import (
     variant_statistics, 
@@ -204,14 +208,13 @@ def run_export(args):
         output = f"variants.{args.format}"
 
     if args.format == "csv":
-        export_csv(
-            variants,
-            output,
-        )
+        export_csv(variants, output)
+
+    elif args.format == "json":
+        export_json(variants, output)
 
     print()
     print("✓ Export completed successfully")
-    print()
     print(f"Saved to: {output}")
 
 def register(subparsers):
@@ -345,7 +348,7 @@ def register(subparsers):
 
     export_parser.add_argument(
         "--format",
-        choices=["csv"],
+        choices=["csv", "json"],
         required=True,
         help="Export format",
     )
