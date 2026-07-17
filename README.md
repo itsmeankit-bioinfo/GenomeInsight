@@ -3,7 +3,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-orange.svg)
-![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen.svg)
+![Status](https://img.shields.io/badge/Status-v0.3.0%20Released-success.svg)
 ![Tests](https://img.shields.io/badge/Tests-46%20Passing-success)
 ![CI](https://img.shields.io/badge/CI-GitHub%20Actions-blue)
 
