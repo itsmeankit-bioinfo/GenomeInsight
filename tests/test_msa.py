@@ -13,7 +13,6 @@ import pytest
 
 from genomeinsight.analysis.msa import (
     format_alignment,
-    alignment_statistics,
     consensus_sequence,
 )
 
