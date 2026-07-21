@@ -385,3 +385,44 @@ def progressive_alignment(sequences):
         "aligned_sequences": aligned_sequences,
         "consensus": consensus,
     }
+
+def sequence_identity(seq1, seq2):
+    """
+    Calculate percentage identity between two aligned sequences.
+    """
+
+    if len(seq1) != len(seq2):
+        raise ValueError(
+            "Aligned sequences must have equal length."
+        )
+
+    matches = sum(
+        a == b
+        for a, b in zip(seq1, seq2)
+    )
+
+    return matches / len(seq1) * 100 if seq1 else 0
+
+def identity_matrix(sequence_names, aligned_sequences):
+    """
+    Compute pairwise identity matrix.
+    """
+
+    matrix = []
+
+    for seq1 in aligned_sequences:
+
+        row = []
+
+        for seq2 in aligned_sequences:
+
+            row.append(
+                round(
+                    sequence_identity(seq1, seq2),
+                    2,
+                )
+            )
+
+        matrix.append(row)
+
+    return matrix

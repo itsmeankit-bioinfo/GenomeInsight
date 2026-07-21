@@ -14,6 +14,8 @@ import pytest
 from genomeinsight.analysis.msa import (
     format_alignment,
     consensus_sequence,
+    sequence_identity,
+    identity_matrix,
 )
 
 def test_read_sequences():
@@ -208,3 +210,27 @@ def test_format_alignment():
     assert "GenomeInsight Multiple Sequence Alignment" in report
     assert "Consensus" in report
     assert "Human" in report
+
+def test_sequence_identity():
+
+    identity = sequence_identity(
+        "ATGC",
+        "ATGT",
+    )
+
+    assert identity == 75.0
+
+def test_identity_matrix():
+
+    matrix = identity_matrix(
+        ["Human", "Mouse"],
+        [
+            "ATGC",
+            "ATGT",
+        ],
+    )
+
+    assert matrix[0][0] == 100.0
+    assert matrix[0][1] == 75.0
+    assert matrix[1][0] == 75.0
+    assert matrix[1][1] == 100.0
