@@ -27,8 +27,8 @@ from genomeinsight.commands import (
     genbank,
     vcf,
     report,
+    msa,
 )
-
 
 def main():
     parser = argparse.ArgumentParser(
@@ -91,7 +91,12 @@ def main():
     # External Tools
     # ==========================
     fastqc.register(subparsers)
+    msa.register(subparsers)
 
+    agrs = parser.parse_args()
+
+    if hasattr(agrs, "func"):
+        agrs.func(agrs) 
     # Future Integrations
     # fastp.register(subparsers)
     # bwa.register(subparsers)
@@ -101,9 +106,7 @@ def main():
     # prokka.register(subparsers)
     # blast.register(subparsers)
 
-    args = parser.parse_args()
-    args.func(args)
-
 
 if __name__ == "__main__":
     main()
+
